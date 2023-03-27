@@ -9,3 +9,4 @@ D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.CoreCompileInputs
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.exe
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.pdb
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.MainForm.resources
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.ProgressForm.resources

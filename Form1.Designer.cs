@@ -37,6 +37,7 @@
             this.tipEncrypt = new System.Windows.Forms.ToolTip(this.components);
             this.btnDecrypt = new System.Windows.Forms.Button();
             this.btnEncrypt = new System.Windows.Forms.Button();
+            this.progress_backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // cmbxEncryptType
@@ -111,6 +112,11 @@
             this.btnEncrypt.UseVisualStyleBackColor = false;
             this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
+            // progress_backgroundWorker
+            // 
+            this.progress_backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.progress_backgroundWorker_DoWork);
+            this.progress_backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.progress_backgroundWorker_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -141,6 +147,7 @@
         private System.Windows.Forms.TextBox txtEncryptKey;
         private System.Windows.Forms.Button btnDecrypt;
         private System.Windows.Forms.ToolTip tipEncrypt;
+        private System.ComponentModel.BackgroundWorker progress_backgroundWorker;
     }
 }
 
