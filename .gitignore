@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/.vs/EncryptTool
+/AES文件加密/AES文件加密
+/bin/Debug
+/AES文件加密.rar
