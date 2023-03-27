@@ -1,0 +1,11 @@
+D:\project\vs_project\EncryptTool\bin\Debug\EncryptTool.exe.config
+D:\project\vs_project\EncryptTool\bin\Debug\EncryptTool.exe
+D:\project\vs_project\EncryptTool\bin\Debug\EncryptTool.pdb
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.AssemblyReference.cache
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.SuggestedBindingRedirects.cache
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.Properties.Resources.resources
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.GenerateResource.cache
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.CoreCompileInputs.cache
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.exe
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.pdb
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.MainForm.resources
