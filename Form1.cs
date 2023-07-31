@@ -88,7 +88,7 @@ namespace EncryptTool
                 doEncrypt(sender, e);
             } if (this.type.Equals("decrypt"))
             {
-                //doEncrypt(sender, e);
+                doEncrypt(sender, e);
             }
 
         }

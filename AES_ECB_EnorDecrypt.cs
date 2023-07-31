@@ -18,7 +18,7 @@ namespace EncryptTool
         /// <returns>密文</returns>
         public static byte[] AESEncrypt(byte[] Data, string Key)
         {
-            byte[] bKey = new byte[32];//采用32位密码加密
+            byte[] bKey = new byte[Key.Length];//采用32位密码加密
             Array.Copy(Encoding.UTF8.GetBytes(Key.PadRight(bKey.Length)), bKey, bKey.Length);//如果用户输入的密码不足32位，自动填充空格至32位
             byte[] Cryptograph = null;//加密后的密文
             RijndaelManaged Aes = new RijndaelManaged();
@@ -83,8 +83,9 @@ namespace EncryptTool
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 original = null;
             }
             return original;
