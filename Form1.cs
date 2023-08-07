@@ -111,7 +111,7 @@ namespace EncryptTool
                                                                                              // 读取文件为字节流
                 FileStream sr = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 // 解密后路径
-                string savePath = path + "//" + fileNameWithoutExtension + "_encrypt" + extension;
+                string savePath = path + "//" + fileNameWithoutExtension + "_" + this.type + extension;
                 FileStream sw = new FileStream(savePath, FileMode.Create, FileAccess.Write);
                 Console.WriteLine("保存路径=" + path);
                 if (sr.Length > 50 * 1024 * 1024)//如果文件大于50M，采取分块加密，按50MB读写
@@ -135,7 +135,7 @@ namespace EncryptTool
                             {
                                 encrpy = AES_ECB_EnorDecrypt.AESDecrypt(mybyte, encryptKey);
                             }
-                            
+                            Console.WriteLine("已解密：" + readBytes);
                             sw.Write(encrpy, 0, encrpy.Length);
                             leftBytes -= numBytesRead;
                             readBytes += numBytesRead;

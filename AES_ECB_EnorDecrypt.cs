@@ -56,27 +56,26 @@ namespace EncryptTool
         {
             byte[] bKey = new byte[Key.Length];
             Array.Copy(Encoding.UTF8.GetBytes(Key.PadRight(bKey.Length)), bKey, bKey.Length);
-            byte[] original = null;//解密后的明文
+            byte[] original = null; // 解密后的明文
             RijndaelManaged Aes = new RijndaelManaged();
             Aes.Mode = CipherMode.ECB;
-            Aes.Padding = PaddingMode.PKCS7;
+            Aes.Padding = PaddingMode.None;
             Aes.KeySize = 128;
             Aes.Key = bKey;
             try
             {
                 using (MemoryStream Memory = new MemoryStream(Data))
                 {
-                    //把内存流对象包装成加密对象
+                    // 把内存流对象包装成加密对象
                     using (CryptoStream Decryptor = new CryptoStream(Memory, Aes.CreateDecryptor(), CryptoStreamMode.Read))
                     {
-                        //明文存储区
+                        // 明文存储区
                         using (MemoryStream originalMemory = new MemoryStream())
                         {
-                            byte[] Buffer = new byte[1024];
-                            int readBytes = 0;
-                            while ((readBytes = Decryptor.Read(Buffer, 0, Buffer.Length)) > 0)
+                            int readByte;
+                            while ((readByte = Decryptor.ReadByte()) != -1)
                             {
-                                originalMemory.Write(Buffer, 0, readBytes);
+                                originalMemory.WriteByte((byte)readByte);
                             }
                             original = originalMemory.ToArray();
                         }
@@ -85,10 +84,13 @@ namespace EncryptTool
             }
             catch (Exception ex)
             {
+                Console.WriteLine("异常");
                 Console.WriteLine(ex);
                 original = null;
             }
             return original;
         }
+
+
     }
 }
