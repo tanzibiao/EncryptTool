@@ -10,3 +10,6 @@ D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.exe
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.pdb
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.MainForm.resources
 D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.ProgressForm.resources
+D:\project\vs_project\EncryptTool\bin\Debug\Newtonsoft.Json.dll
+D:\project\vs_project\EncryptTool\bin\Debug\Newtonsoft.Json.xml
+D:\project\vs_project\EncryptTool\obj\Debug\EncryptTool.csproj.CopyComplete

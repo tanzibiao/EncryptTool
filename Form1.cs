@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,7 +45,27 @@ namespace EncryptTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ConfigData configData = getConfigData();
+            if (configData != null)
+            {
+                if (configData.Settings.TryGetValue("encryptKey", out string value))
+                {
+                    txtEncryptKey.Text = value;
+                }
+            }
+        }
 
+        private static ConfigData getConfigData()
+        {
+            // 获取 exe 程序的目录
+            string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            // 构造配置文件的完整路径
+            string configFilePath = Path.Combine(exeDirectory, "config.json");
+
+            // 读取配置文件中的设置
+            ConfigData configData = ReadConfigFromFile(configFilePath);
+            return configData;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -197,6 +218,19 @@ namespace EncryptTool
                 sr.Close();
                 sw.Close();
             }
+
+            //保存秘钥
+            ConfigData configData = getConfigData();
+            if (configData == null) {
+                configData = new ConfigData();
+            }
+            configData.Settings["encryptKey"] = encryptKey;
+            // 获取 exe 程序的目录
+            string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            // 构造配置文件的完整路径
+            string configFilePath = Path.Combine(exeDirectory, "config.json");
+            // 写入配置文件
+            WriteConfigToFile(configFilePath, configData);
         }
 
         private void progress_backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -242,6 +276,26 @@ namespace EncryptTool
                     form.Close();
                 }
             }
+        }
+
+        static ConfigData ReadConfigFromFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                return JsonConvert.DeserializeObject<ConfigData>(json);
+            }
+            return new ConfigData();
+        }
+
+        static void WriteConfigToFile(string filePath, ConfigData configData)
+        {
+            string json = JsonConvert.SerializeObject(configData, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+        class ConfigData
+        {
+            public Dictionary<string, string> Settings { get; set; } = new Dictionary<string, string>();
         }
     }
 }
