@@ -26,7 +26,7 @@ namespace EncryptTool
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine($"进度条变化={e.ProgressPercentage}");
+            //Console.WriteLine($"进度条变化={e.ProgressPercentage}");
             this.progressBar1.Value = e.ProgressPercentage;  //获取异步任务的进度百分比
         }
 

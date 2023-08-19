@@ -18,6 +18,7 @@ namespace EncryptTool
 {
     public partial class MainForm : Form
     {
+        
         private string type = "";
         private string[] files = null;
         public MainForm()
@@ -136,14 +137,15 @@ namespace EncryptTool
                 string savePath = path + "//" + fileNameWithoutExtension + "_" + this.type + extension;
                 FileStream sw = new FileStream(savePath, FileMode.Create, FileAccess.Write);
                 Console.WriteLine("保存路径=" + path);
-                if (sr.Length > 50 * 1024 * 1024)//如果文件大于50M，采取分块加密，按50MB读写
+                const int V = 1 * 1024 * 1024;
+                if (sr.Length > V)//如果文件大于50M，采取分块加密，按50MB读写
                 {
-                    byte[] mybyte = new byte[52428800];//每50MB加密一次                  
-                    int numBytesRead = 52428800;//每次加密的流大小
+                    byte[] mybyte = new byte[V];//每50MB加密一次                  
+                    int numBytesRead = V;//每次加密的流大小
                     long leftBytes = sr.Length;//剩余需要加密的流大小
                     long readBytes = 0;//已经读取的流大小
                                        //每50MB加密后会变成50MB+16B
-                    byte[] encrpy = new byte[52428816];
+                    byte[] encrpy = new byte[V+16];
                     while (true)
                     {
                         if (leftBytes > numBytesRead)
@@ -157,13 +159,12 @@ namespace EncryptTool
                             {
                                 encrpy = AES_ECB_EnorDecrypt.AESDecrypt(mybyte, encryptKey);
                             }
-                            Console.WriteLine("已解密：" + readBytes);
+                            Console.WriteLine("已处理：" + readBytes);
                             sw.Write(encrpy, 0, encrpy.Length);
                             leftBytes -= numBytesRead;
                             readBytes += numBytesRead;
 
                             int percentProgress = (int)((double)readBytes / totalSize * 100);
-                            Console.WriteLine($"进度={percentProgress}");
                             worker.ReportProgress(percentProgress);
                             if (worker.CancellationPending) //获取程序是否已请求取消后台操作
                             {
