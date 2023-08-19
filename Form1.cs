@@ -123,6 +123,7 @@ namespace EncryptTool
             {
                 totalSize += new FileStream(files[i], FileMode.Open, FileAccess.Read).Length;
             }
+            Console.WriteLine($"总大小={totalSize}");
             for (int i = 0; i < files.Length; i++)
             {
                 string fileName = files[i];
@@ -161,7 +162,9 @@ namespace EncryptTool
                             leftBytes -= numBytesRead;
                             readBytes += numBytesRead;
 
-                            worker.ReportProgress((int)(mybyte.Length / totalSize * 100));
+                            int percentProgress = (int)((double)readBytes / totalSize * 100);
+                            Console.WriteLine($"进度={percentProgress}");
+                            worker.ReportProgress(percentProgress);
                             if (worker.CancellationPending) //获取程序是否已请求取消后台操作
                             {
                                 e.Cancel = true;
@@ -184,7 +187,7 @@ namespace EncryptTool
                             
                             sw.Write(newWriteByte, 0, newWriteByte.Length);
                             readBytes += leftBytes;
-                            worker.ReportProgress((int)(newByte.Length / totalSize * 100));
+                            worker.ReportProgress((int)((double)readBytes / totalSize * 100));
                             if (worker.CancellationPending) //获取程序是否已请求取消后台操作
                             {
                                 e.Cancel = true;
@@ -249,6 +252,11 @@ namespace EncryptTool
             }
         }
 
+        private void progress_backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Console.WriteLine($"进度更新={e.ProgressPercentage}");
+            //this.progressBar1.Value = e.ProgressPercentage; // 更新进度条值
+        }
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
 
