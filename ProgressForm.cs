@@ -27,7 +27,9 @@ namespace EncryptTool
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Console.WriteLine($"进度条变化={e.ProgressPercentage}");
-            this.progressBar1.Value = e.ProgressPercentage;  //获取异步任务的进度百分比
+            int progressPercentage = e.ProgressPercentage;
+            lab_process.Text = progressPercentage.ToString() + "%";
+            this.progressBar1.Value = progressPercentage;  //获取异步任务的进度百分比
         }
 
         void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -46,6 +48,11 @@ namespace EncryptTool
             this.backgroundWorker1.CancelAsync(); //请求取消挂起的后台操作
             this.btnCancel.Enabled = false;
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
